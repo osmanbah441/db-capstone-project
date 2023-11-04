@@ -51,13 +51,13 @@ CREATE TABLE IF NOT EXISTS `LittleLemonDB`.`bookings` (
   `bookingID` INT NOT NULL,
   `date` DATE NOT NULL,
   `tableNumber` INT NOT NULL,
-  `customer_id` INT NOT NULL,
+  `customerID` INT NOT NULL,
   `staffID` INT NOT NULL,
   PRIMARY KEY (`bookingID`),
   INDEX `fk_customers_idx` (`customer_id` ASC) VISIBLE,
   INDEX `fk_staff_idx` (`staffID` ASC) VISIBLE,
   CONSTRAINT `fk_customers`
-    FOREIGN KEY (`customer_id`)
+    FOREIGN KEY (`customerID`)
     REFERENCES `LittleLemonDB`.`customers` (`customerID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
