@@ -19,7 +19,7 @@ USE `LittleLemonDB` ;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `LittleLemonDB`.`customers` (
   `customerID` INT NOT NULL,
-  `name` VARCHAR(100) NOT NULL,
+  `fullName` VARCHAR(100) NOT NULL,
   `email` VARCHAR(100) NOT NULL,
   `phoneNumber` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`customerID`),
@@ -34,7 +34,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `LittleLemonDB`.`staffs` (
   `staffID` INT NOT NULL,
   `role` VARCHAR(45) NOT NULL,
-  `salary` VARCHAR(45) NOT NULL,
+  `salary` int NOT NULL,
   `fullName` VARCHAR(45) NOT NULL,
   `phoneNumber` VARCHAR(45) NULL,
   `email` VARCHAR(255) NULL,
@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS `LittleLemonDB`.`bookings` (
   `customerID` INT NOT NULL,
   `staffID` INT NOT NULL,
   PRIMARY KEY (`bookingID`),
-  INDEX `fk_customers_idx` (`customer_id` ASC) VISIBLE,
+  INDEX `fk_customers_idx` (`customerID` ASC) VISIBLE,
   INDEX `fk_staff_idx` (`staffID` ASC) VISIBLE,
   CONSTRAINT `fk_customers`
     FOREIGN KEY (`customerID`)
@@ -87,8 +87,9 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `LittleLemonDB`.`menus` (
   `menuID` INT NOT NULL,
+  `menuName` VARCHAR(45) NOT NULL,
   `cuisine` VARCHAR(45) NOT NULL,
-  `price` DECIMAL NOT NULL,
+  `price` DECIMAL(5, 2) NOT NULL,
   `menuItemID` INT NOT NULL,
   PRIMARY KEY (`menuID`),
   INDEX `fk_menuItems_idx` (`menuItemID` ASC) VISIBLE,
@@ -107,7 +108,7 @@ CREATE TABLE IF NOT EXISTS `LittleLemonDB`.`orders` (
   `orderID` INT NOT NULL,
   `date` DATE NOT NULL,
   `quantity` INT NOT NULL,
-  `totalCost` DECIMAL NOT NULL,
+  `totalCost` DECIMAL(5,2) NOT NULL,
   `bookingID` INT NOT NULL,
   `menuID` INT NOT NULL,
   PRIMARY KEY (`orderID`),
