@@ -20,12 +20,11 @@ INSERT INTO `LittleLemonDB`.`staffs` (`staffID`, `role`, `salary`, `fullName`, `
 -- -----------------------------------------------------
 -- Table `LittleLemonDB`.`bookings`
 -- -----------------------------------------------------
-INSERT INTO `LittleLemonDB`.`bookings` (`bookingID`, `date`, `tableNumber`, `customerID`, `staffID`) VALUES
-(1, '2023-11-05', 1, 1, 1),
-(2, '2023-11-05', 2, 2, 2),
-(3, '2023-11-05', 3, 3, 3),
-(4, '2023-11-05', 4, 4, 4),
-(5, '2023-11-05', 5, 5, 4);
+INSERT INTO `LittleLemonDB`.`bookings` (`bookingID`, `date`, `tableNumber`, `customerID`) VALUES
+(1, '2022-10-10', 5, 1),
+(2, '2022-11-12', 3, 3),
+(3, '2022-10-11', 2, 2),
+(4, '2022-10-13', 2, 1);
 
 -- -----------------------------------------------------
 -- Table `LittleLemonDB`.`menuItems`

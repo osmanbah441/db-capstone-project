@@ -3,7 +3,6 @@
 -- -----------------------------------------------------
 use littlelemondb;
 
--- Task 1
 CREATE VIEW `OrdersView` AS
 SELECT 
   `orderID`,
@@ -16,7 +15,6 @@ WHERE
 
 SELECT * FROM OrdersView;
  
--- task 2
 SELECT customers.customerID, customers.fullName, orders.orderID, orders.totalCost, menus.menuName, menuItems.courseName
 FROM customers
 JOIN orders ON customers.customerID = orders.customerID
@@ -24,7 +22,6 @@ JOIN menus ON orders.menuID = menus.menuID
 JOIN menuItems ON menus.menuItemID = menuItems.menuItemID
 WHERE orders.totalCost > 150;
 
--- task 3
 SELECT menuName
 FROM menus
 WHERE menuID = ANY (SELECT menuID  FROM orders WHERE quantity > 2);
@@ -34,7 +31,6 @@ WHERE menuID = ANY (SELECT menuID  FROM orders WHERE quantity > 2);
 -- Exercise: Create optimized queries to manage and analyze data
 -- -----------------------------------------------------
 
--- task 1
 DELIMITER //
 CREATE PROCEDURE GetMaxQuantity()
 BEGIN
@@ -46,14 +42,14 @@ DELIMITER ;
 
 CALL GetMaxQuantity();
 
--- task 2
+
 PREPARE GetOrderDetail 
 FROM 'SELECT orderID, quantity, totalCost FROM orders WHERE customerID = ?';
 
 SET @id = 1;
 EXECUTE GetOrderDetail USING @id;
 
--- task 3
+
 DELIMITER //
 CREATE PROCEDURE CancelOrder(id INT)
 BEGIN
@@ -66,7 +62,3 @@ BEGIN
 DELIMITER ;
 
 call CancelOrder(10);
-
-
-
-

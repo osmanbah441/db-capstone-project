@@ -30,23 +30,6 @@ DEFAULT CHARACTER SET = utf8mb3;
 
 
 -- -----------------------------------------------------
--- Table `LittleLemonDB`.`staffs`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `LittleLemonDB`.`staffs` (
-  `staffID` INT NOT NULL,
-  `role` VARCHAR(45) NOT NULL,
-  `salary` INT NOT NULL,
-  `fullName` VARCHAR(45) NOT NULL,
-  `phoneNumber` VARCHAR(45) NULL DEFAULT NULL,
-  `email` VARCHAR(255) NULL DEFAULT NULL,
-  PRIMARY KEY (`staffID`),
-  UNIQUE INDEX `phone_number_UNIQUE` (`phoneNumber` ASC) VISIBLE,
-  UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb3;
-
-
--- -----------------------------------------------------
 -- Table `LittleLemonDB`.`bookings`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `LittleLemonDB`.`bookings` (
@@ -54,16 +37,11 @@ CREATE TABLE IF NOT EXISTS `LittleLemonDB`.`bookings` (
   `date` DATE NOT NULL,
   `tableNumber` INT NOT NULL,
   `customerID` INT NOT NULL,
-  `staffID` INT NOT NULL,
   PRIMARY KEY (`bookingID`),
   INDEX `fk_customers_idx` (`customerID` ASC) VISIBLE,
-  INDEX `fk_staff_idx` (`staffID` ASC) VISIBLE,
   CONSTRAINT `fk_customers_bookings`
     FOREIGN KEY (`customerID`)
-    REFERENCES `LittleLemonDB`.`customers` (`customerID`),
-  CONSTRAINT `fk_staff_bookings`
-    FOREIGN KEY (`staffID`)
-    REFERENCES `LittleLemonDB`.`staffs` (`staffID`))
+    REFERENCES `LittleLemonDB`.`customers` (`customerID`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
 
@@ -142,6 +120,23 @@ CREATE TABLE IF NOT EXISTS `LittleLemonDB`.`order_delivery_status` (
     REFERENCES `LittleLemonDB`.`orders` (`orderID`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb3;
+
+
+-- -----------------------------------------------------
+-- Table `LittleLemonDB`.`staffs`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `LittleLemonDB`.`staffs` (
+  `staffID` INT NOT NULL,
+  `role` VARCHAR(45) NOT NULL,
+  `salary` INT NOT NULL,
+  `fullName` VARCHAR(45) NOT NULL,
+  `phoneNumber` VARCHAR(45) NULL DEFAULT NULL,
+  `email` VARCHAR(255) NULL DEFAULT NULL,
+  PRIMARY KEY (`staffID`),
+  UNIQUE INDEX `phone_number_UNIQUE` (`phoneNumber` ASC) VISIBLE,
+  UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb3;
 
