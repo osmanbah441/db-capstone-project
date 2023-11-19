@@ -1,6 +1,6 @@
 DELIMITER //
 
-CREATE PROCEDURE CheckBooking (IN booking_date DATE, IN table_number INT)
+CREATE PROCEDURE CheckBooking (booking_date DATE, table_number INT)
 BEGIN
     DECLARE booking_status VARCHAR(100);
 
@@ -26,7 +26,7 @@ CALL CheckBooking('2022-10-10', 5);
 
 DELIMITER //
 
-CREATE PROCEDURE AddValidBooking (IN booking_date DATE, IN table_number INT)
+CREATE PROCEDURE AddValidBooking (booking_date DATE, table_number INT)
 BEGIN
     DECLARE table_booked INT DEFAULT 0;
 
@@ -55,8 +55,47 @@ END //
 
 DELIMITER ;
 
-
-
-
 CALL AddValidBooking('2024-10-10', 5);
 
+DELIMITER //
+CREATE PROCEDURE AddBooking(booking_id INT, customer_id int, table_number INT, booking_date DATE)
+BEGIN
+INSERT INTO bookings(bookingID, customerID, tableNumber, date)
+VALUES (booking_id, customer_id, table_number, booking_date);
+
+SELECT "New booking added" AS Confirmation;
+
+END //
+
+DELIMITER ;
+
+CALL AddBooking(13, 2, 4, "2023-10-10");
+
+
+DELIMITER //
+
+CREATE PROCEDURE UpdateBooking (booking_id INT, booking_date Date)
+BEGIN
+UPDATE bookings SET date = booking_date
+WHERE bookingID = booking_id;
+
+SELECT CONCAT("Booking ", booking_id , " updated") AS Confirmation;
+
+END //
+
+DELIMITER ;
+
+CALL UpdateBooking(13, "2022-12-17");
+
+DELIMITER //
+
+CREATE PROCEDURE CancelBooking (booking_id INT)
+BEGIN
+	DELETE FROM bookings WHERE bookingID = booking_id;
+	SELECT CONCAT("Booking ", booking_id, " cancelled") AS Confirmation;
+
+END //
+
+DELIMITER ;
+
+CALL CancelBooking(13);
