@@ -1,5 +1,5 @@
+-------------------------------------------------------------------------
 DELIMITER //
-
 CREATE PROCEDURE CheckBooking (booking_date DATE, table_number INT)
 BEGIN
     DECLARE booking_status VARCHAR(100);
@@ -24,6 +24,7 @@ DELIMITER ;
 
 CALL CheckBooking('2022-10-10', 5);
 
+---------------------------------------------------------------------------
 DELIMITER //
 
 CREATE PROCEDURE AddValidBooking (booking_date DATE, table_number INT)
@@ -57,6 +58,7 @@ DELIMITER ;
 
 CALL AddValidBooking('2024-10-10', 5);
 
+---------------------------------------------------------------------------
 DELIMITER //
 CREATE PROCEDURE AddBooking(booking_id INT, customer_id int, table_number INT, booking_date DATE)
 BEGIN
@@ -71,7 +73,7 @@ DELIMITER ;
 
 CALL AddBooking(13, 2, 4, "2023-10-10");
 
-
+---------------------------------------------------------------------------
 DELIMITER //
 
 CREATE PROCEDURE UpdateBooking (booking_id INT, booking_date Date)
